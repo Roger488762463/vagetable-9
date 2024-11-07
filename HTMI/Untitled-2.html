@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哥布林大圖鑑 - 封面</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: url('背景_工作區域 1.png') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        .cover {
+            text-align: center;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .cover img.main-image {
+            width: 200px;
+            animation: fadeIn 3s ease forwards;
+            opacity: 0;
+            margin-bottom: 20px;
+            z-index: 1;
+        }
+
+        .cover img.enter-button {
+            width: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            animation: fadeIn 3s ease forwards;
+            opacity: 0;
+            position: absolute;
+            top: 120%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+        .cover img.enter-button:hover {
+            transform: scale(1.1) translate(-50%, -50%);
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(6); }
+        }
+
+        /* 哥布林移動動畫樣式 */
+        .moving-goblin {
+            position: fixed;
+            bottom: 20px;
+            width: 100px;
+            animation: goblinMove 4s linear infinite alternate;
+            transition: transform 0.5s; /* 添加平滑鏡像效果 */
+        }
+
+        /* 左右移動的動畫 */
+        @keyframes goblinMove {
+            0% { left: 0; }
+            100% { left: calc(100% - 100px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cover">
+        <img src="封面_工作區域 1_工作區域 1.png" alt="哥布林標誌" class="main-image">
+        
+        <a href="index.html">
+            <img src="按鈕_工作區域 1.png" alt="進入網站按鈕" class="enter-button">
+        </a>
+    </div>
+
+    <!-- 底部哥布林動畫 -->
+    <img src="跑跑歌.png" alt="哥布林" class="moving-goblin" id="goblin">
+
+    <script>
+        // 獲取哥布林元素
+        const goblin = document.getElementById('goblin');
+        let isFlipped = false;
+
+        // 監聽動畫交替事件，當到達邊界時鏡像旋轉
+        goblin.addEventListener('animationiteration', () => {
+            isFlipped = !isFlipped;
+            goblin.style.transform = isFlipped ? 'scaleX(-1)' : 'scaleX(1)';
+        });
+    </script>
+</body>
+</html>
